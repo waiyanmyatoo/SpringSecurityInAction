@@ -14,12 +14,12 @@
     <name>SpringSecurityInAction</name>
     <description>SpringSecurityInAction</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11.0.2</java.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
