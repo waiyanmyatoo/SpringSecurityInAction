@@ -1,5 +1,6 @@
 package com.example.springsecurityinaction.config;
 
+import com.example.springsecurityinaction.services.InMemoryUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,13 +14,27 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import java.util.List;
+
 @Configuration
 public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomAuthenticationProvider customAuthenticationProvider;
 
-//    @Bean
+    /// Our own custom user details service
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+
+        UserDetails u = new User("john", "12345", List.of(() -> "read"));
+
+        List<UserDetails> users = List.of(u);
+
+        return new InMemoryUserDetailsService(users);
+    }
+
+    //    @Bean
 //    public UserDetailsService userDetailsService() {
 //        var userDetailsManager = new InMemoryUserDetailsManager();
 //
@@ -30,10 +45,10 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 //        return userDetailsManager;
 //    }
 //
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
 
     /// alternative way to configure userdetails service and password encoder
     @Override
@@ -44,9 +59,9 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 //
 //        userDetailsService.createUser(user);
 //
-//        auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
+        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
 
-        auth.authenticationProvider(customAuthenticationProvider);
+//        auth.authenticationProvider(customAuthenticationProvider);
     }
 
     @Override
