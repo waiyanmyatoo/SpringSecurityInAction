@@ -24,7 +24,14 @@ public class ProjectConfig {
     /// Our own custom user details service
     @Bean
     public UserDetailsService userDetailsService(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
+
+        String userByEmailQuery = "select username,password,email, enabled from users where email = ?";
+
+        var userDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+        userDetailsManager.setUsersByUsernameQuery(userByEmailQuery);
+
+        return userDetailsManager;
 
     }
 
