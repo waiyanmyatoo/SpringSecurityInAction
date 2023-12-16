@@ -34,10 +34,4 @@ public class ProjectConfig {
     }
 
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.httpBasic();
-//
-//        http.authorizeRequests().anyRequest().authenticated();
-//    }
 }
