@@ -35,8 +35,7 @@ public class SecurityCryptoDemo {
     String salt = KeyGenerators.string().generateKey();
     String password = "secret";
     String valueToEncrypt = "HELLO";
-    TextEncryptor e =
-            Encryptors.queryableText(password, salt);
+    TextEncryptor e =  Encryptors.queryableText(password, salt);
     String encrypted1 = e.encrypt(valueToEncrypt);
     String encrypted2 = e.encrypt(valueToEncrypt);
 }
