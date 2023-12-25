@@ -2,6 +2,7 @@ package com.example.springsecurityinaction.crypto;
 
 import org.springframework.security.crypto.encrypt.BytesEncryptor;
 import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.keygen.BytesKeyGenerator;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.security.crypto.keygen.StringKeyGenerator;
@@ -32,10 +33,10 @@ public class SecurityCryptoDemo {
     byte[] decrypted = bytesEncryptor.decrypt(encrypted);
 
 
-    String salt = KeyGenerators.string().generateKey();
-    String password = "secret";
-    String valueToEncrypt = "HELLO";
-    TextEncryptor e =  Encryptors.queryableText(password, salt);
-    String encrypted1 = e.encrypt(valueToEncrypt);
-    String encrypted2 = e.encrypt(valueToEncrypt);
+    String salt1 = KeyGenerators.string().generateKey();
+    String password1 = "secret";
+    String valueToEncrypt1 = "HELLO";
+    TextEncryptor e =  Encryptors.queryableText(password1, salt1);
+    String encrypted1 = e.encrypt(valueToEncrypt1);
+    String encrypted2 = e.encrypt(valueToEncrypt1);
 }
